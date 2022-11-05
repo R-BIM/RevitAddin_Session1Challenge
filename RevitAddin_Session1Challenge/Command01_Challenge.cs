@@ -23,7 +23,7 @@ namespace RevitAddin_Session1Challenge
             try
             {
 
-                TaskDialog.Show("test", "Hello World !!!!");
+                TaskDialog.Show("test", "Hello World ");
 
 
                 return Result.Succeeded;
