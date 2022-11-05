@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	
+
+	<AddIn Type="Command">
+		<Text>Command RevitAddin_Session1Challenge</Text>
+		<Description>Some description for RevitAddin_Session1Challenge</Description>
+		<Assembly>RevitAddin_Session1Challenge.dll</Assembly>
+		<FullClassName>RevitAddin_Session1Challenge.Command01_Challenge</FullClassName>
+		<ClientId>632282A2-BE29-44A2-B151-C2BACB9A562B</ClientId>
+		<VendorId>com.typepad.thebuildingcoder</VendorId>
+		<VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+	</AddIn>	
+	
+  <AddIn Type="Application">
+    <Name>Application RevitAddin_Session1Challenge</Name>
+    <Assembly>RevitAddin_Session1Challenge.dll</Assembly>
+    <FullClassName>RevitAddin_Session1Challenge.App</FullClassName>
+    <ClientId>c3e91032-bbba-4004-9e9f-31a289c084b1</ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>
