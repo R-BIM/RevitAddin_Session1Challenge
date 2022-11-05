@@ -7,6 +7,7 @@ using Autodesk.Revit.UI.Selection;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 #endregion
 
@@ -23,9 +24,25 @@ namespace RevitAddin_Session1Challenge
             try
             {
 
-                TaskDialog.Show("test", "Hello World ! ");
+                //TaskDialog.Show("test", "Hello World ! ");
+                IList<int> div3List = new List<int>();
+                for (int i = 0; i < 100; i++)
+                {
+                    if (i % 3 == 0)   
+                    {
+                        div3List.Add(i);
+                      
+                    }
 
+                                       
+                }
 
+                foreach (var item in div3List)
+                {
+                    item.ToString();
+                }
+                
+                TaskDialog.Show("Result", div3List.ToString());
                 return Result.Succeeded;
 
             }
