@@ -3,6 +3,7 @@ using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using Autodesk.Revit.UI.Events;
 using Autodesk.Revit.UI.Selection;
 using System;
 using System.Collections.Generic;
@@ -23,8 +24,6 @@ namespace RevitAddin_Session1Challenge
         {
             try
             {
-
-                //TaskDialog.Show("test", "Hello World ! ");
                 IList<int> div3List = new List<int>();
                 for (int i = 0; i < 100; i++)
                 {
@@ -33,16 +32,13 @@ namespace RevitAddin_Session1Challenge
                         div3List.Add(i);
                       
                     }
-
-                                       
+                                      
                 }
 
-                foreach (var item in div3List)
-                {
-                    item.ToString();
-                }
+                    TaskDialog.Show("list of numbers divisible by 3", "List contains : " + Environment.NewLine +
+                        String.Join(Environment.NewLine, div3List));
+
                 
-                TaskDialog.Show("Result", div3List.ToString());
                 return Result.Succeeded;
 
             }
