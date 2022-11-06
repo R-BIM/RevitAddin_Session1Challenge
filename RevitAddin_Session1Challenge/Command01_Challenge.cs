@@ -29,7 +29,8 @@ namespace RevitAddin_Session1Challenge
 
             try
             {
-                XYZ point = new XYZ(0, 5, 0);
+                XYZ myPoint = new XYZ(0, 5, 0);
+                XYZ newPoint = myPoint + new XYZ(0, 5, 0);
                 FilteredElementCollector collector = new FilteredElementCollector(doc);
                 collector.OfClass(typeof(TextNoteType));    
                     
@@ -37,15 +38,12 @@ namespace RevitAddin_Session1Challenge
                 for (int i = 0; i < 100; i++)
                 {
 
-  
-
-
                     if (i % 3 == 0)
                     {
                         Transaction transaction = new Transaction(doc);
                         transaction.Start("Create text notes");
 
-                        TextNote textNote = TextNote.Create(doc, doc.ActiveView.Id, point, "FIZZ", collector.FirstElementId());
+                        TextNote textNote = TextNote.Create(doc, doc.ActiveView.Id, myPoint, i.ToString() + "FIZZ" + "\n", collector.FirstElementId());
 
                      transaction.Commit();
                     }
