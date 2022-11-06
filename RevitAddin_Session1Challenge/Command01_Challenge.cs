@@ -29,55 +29,55 @@ namespace RevitAddin_Session1Challenge
 
             try
             {
-                XYZ myPoint = new XYZ(0, 5, 0);
-                XYZ newPoint = myPoint + new XYZ(0, 5, 0);
+                Transaction transaction = new Transaction(doc);
+                transaction.Start("Create text notes");
+
+                XYZ my3Point = new XYZ(0, 3, 0);
+                XYZ my5Point = new XYZ(8, 0, 0);
+                XYZ my35Point = new XYZ(16, 0, 0);
+                XYZ myPoint = new XYZ(28, 0, 0);
+                XYZ newPoint = myPoint;
+                XYZ new3Point = my3Point;
+                XYZ new5Point = my5Point;
+                XYZ new35Point = my35Point;
+               
                 FilteredElementCollector collector = new FilteredElementCollector(doc);
-                collector.OfClass(typeof(TextNoteType));    
-                    
+                collector.OfClass(typeof(TextNoteType));
 
                 for (int i = 0; i < 100; i++)
                 {
 
                     if (i % 3 == 0)
                     {
-                        Transaction transaction = new Transaction(doc);
-                        transaction.Start("Create text notes");
-
-                        TextNote textNote = TextNote.Create(doc, doc.ActiveView.Id, myPoint, i.ToString() + "FIZZ" + "\n", collector.FirstElementId());
-
-                     transaction.Commit();
+                        new3Point = new3Point.Add(my3Point);
+                        TextNote textNote = TextNote.Create(doc, doc.ActiveView.Id, new3Point, i.ToString() + "-" + "FIZZ" + "\n", collector.FirstElementId());
                     }
 
 
+                    if (i % 5 == 0)
+                    {
+                        new5Point = new3Point.Add(my5Point);
+                        TextNote textNote = TextNote.Create(doc, doc.ActiveView.Id, new5Point, i.ToString() + "-" + "BUZZ" + "\n", collector.FirstElementId());                     
+
+                    }
+
+                    if (i % 3 == 0 && i % 5 == 0 )
+                    {
+                        new35Point = new3Point.Add(my35Point);
+                        TextNote textNote = TextNote.Create(doc, doc.ActiveView.Id, new35Point, i.ToString() + "-" + "FIZZBUZZ" + "\n", collector.FirstElementId());
+                    }
 
 
-                    //var switch_on = true;
-
-                    //switch (switch_on)
-
-                    //{
-
-                    //    case
-                    //    i % 3 == 0:
-                    //        div3List.Add(i);
-                    //        TaskDialog.Show("list of numbers divisible by 3", "List contains : " + Environment.NewLine +
-                    //                                                               String.Join(Environment.NewLine, div3List));
-                    //        break;
-
-
-                    //        case
-                    //        i % 5 == 0:
-                    //        div5List.Add(i);
-                    //        TaskDialog.Show("list of numbers divisible by 3", "List contains : " + Environment.NewLine +
-                    //                                   String.Join(Environment.NewLine, div3List));
-                    //        break;
-
-                    //case
-                    //    i % 3 == 0 && i % 5 == 0: div35List.Add(i);
-                    //    TaskDialog.Show("list of numbers divisible by 3", "List contains : " + Environment.NewLine +
-                    //   String.Join(Environment.NewLine, div35List));
+                    if (i % 3 != 0 && i % 5 != 0)
+                    {
+                        newPoint = new3Point.Add(myPoint);
+                        TextNote textNote = TextNote.Create(doc, doc.ActiveView.Id, newPoint, i.ToString() + "\n", collector.FirstElementId());
+                    }
 
                 }
+
+
+                transaction.Commit();
 
                 return Result.Succeeded;
 
@@ -87,7 +87,7 @@ namespace RevitAddin_Session1Challenge
 
             {
 
-              string Msage = e.Message;
+              string Message = e.Message;
 
                 return Result.Failed;   
             }  
