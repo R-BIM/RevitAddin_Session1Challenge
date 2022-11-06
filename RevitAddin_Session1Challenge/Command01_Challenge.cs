@@ -49,23 +49,7 @@ namespace RevitAddin_Session1Challenge
                     }
 
 
-                    else if (i % 5 == 0)
-                    {
 
-
-                    }
-
-                    else if (i % 3 == 0 && i % 5 == 0)
-                    {
-
-
-                    }
-
-                    else
-                    {
-
-
-                    }
 
                     //var switch_on = true;
 
