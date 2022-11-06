@@ -22,45 +22,50 @@ namespace RevitAddin_Session1Challenge
           ref string message,
           ElementSet elements)
         {
+
+            UIDocument uidoc = commandData.Application.ActiveUIDocument;
+            Document doc = uidoc.Document;
+
+
             try
             {
-
+                XYZ point = new XYZ(0, 5, 0);
+                FilteredElementCollector collector = new FilteredElementCollector(doc);
+                collector.OfClass(typeof(TextNoteType));    
+                    
 
                 for (int i = 0; i < 100; i++)
                 {
-                    IList<int> div3List = new List<int>();
-                    IList<int> div5List = new List<int>();
-                    IList<int> div35List = new List<int>();
-                    IList<int> notDiv35List = new List<int>();  
+
+  
+
 
                     if (i % 3 == 0)
                     {
-                        div3List.Add(i);
-                        TaskDialog.Show("list of numbers divisible by 3", "List contains : " + Environment.NewLine +
-                                                                               String.Join(Environment.NewLine, div3List));
+                        Transaction transaction = new Transaction(doc);
+                        transaction.Start("Create text notes");
+
+                        TextNote textNote = TextNote.Create(doc, doc.ActiveView.Id, point, "FIZZ", collector.FirstElementId());
+
+                     transaction.Commit();
                     }
 
 
                     else if (i % 5 == 0)
                     {
-                        div5List.Add(i);
-                        TaskDialog.Show("list of numbers divisible by 5", "List contains : " + Environment.NewLine +
-                                                       String.Join(Environment.NewLine, div5List));
+
 
                     }
 
                     else if (i % 3 == 0 && i % 5 == 0)
                     {
-                        div35List.Add(i);
-                        TaskDialog.Show("list of numbers divisible by 3 and 5", "List contains : " + Environment.NewLine +
-                                                       String.Join(Environment.NewLine, div35List));
+
 
                     }
 
                     else
                     {
-                        TaskDialog.Show("list of numbers not divisible by 3 and 5", "List contains : " + Environment.NewLine +
-                                                       String.Join(Environment.NewLine, notDiv35List));
+
 
                     }
 
